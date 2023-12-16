@@ -17,6 +17,8 @@ COPY package.json ./
 #Run npm install command
 RUN npm install -g npm@8.5.1
 
+# Install Jest globally
+RUN npm install -g jest@29.6.2
 
 #Copy the app
 COPY . ./
