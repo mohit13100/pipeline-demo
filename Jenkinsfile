@@ -1,22 +1,21 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID="<REPLACE WITH ACCOUNT ID>"
-        AWS_DEFAULT_REGION="<REPLACE WITH REGION>"
-	    CLUSTER_NAME="<REPLACE WITH CLUSTER NAME>"
-	    SERVICE_NAME="<REPLACE WITH SERVICE NAME>"
-	    TASK_DEFINITION_NAME="<REPLACE WITH TASK DEFINITION NAME>"
-	    DESIRED_COUNT="1"
-        IMAGE_REPO_NAME="<REPLACE WITH ECR REPO NAME>"
-        //Do not edit the variable IMAGE_TAG. It uses the Jenkins job build ID as a tag for the new image.
-        IMAGE_TAG="${env.BUILD_ID}"
-        //Do not edit REPOSITORY_URI.
-        REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-	    registryCredential = "<REPLACE WITH NAME OF AWS CREDENTIAL>"
-	    JOB_NAME = "<REPLACE WITH JOB NAME>"
-	    TEST_CONTAINER_NAME = "${JOB_NAME}-test-server"
-    
+    AWS_ACCOUNT_ID="574143435348" // Replace with your AWS account ID
+    AWS_DEFAULT_REGION="us-east-1" // Replace with your desired AWS region
+    CLUSTER_NAME="cluster-of-container" // Replace with your ECS cluster name
+    SERVICE_NAME="node-webservice-1" // Replace with your ECS service name
+    TASK_DEFINITION_NAME="nodejs-webserver-task-1" // Replace with your ECS task definition name
+    DESIRED_COUNT="1" // Set desired count if you need to scale your service
+    IMAGE_REPO_NAME="repo-ecr-2" // Replace with your ECR repository name
+    IMAGE_TAG="${env.BUILD_ID}" // This is set dynamically to tag your image with the Jenkins build ID
+    REPOSITORY_URI = "574143435348.dkr.ecr.us-east-1.amazonaws.com/repo-ecr-2" // Combined URI for your ECR repository
+    registryCredential = "aws-ecs-jenkins-cred-id" // The Jenkins credential ID for AWS
+    JOB_NAME = "aws-ecs-pipeline-job" // Your Jenkins job name
+    TEST_CONTAINER_NAME = "${JOB_NAME}-test-server" // A name for the test container
 }
+    
+
    
     stages {
 
