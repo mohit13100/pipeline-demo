@@ -17,6 +17,8 @@ COPY package.json ./
 #Run npm install command
 RUN npm install -g npm@8.5.1
 
+# Run npm install command
+RUN npm install
 
 #Copy the app
 COPY . ./
