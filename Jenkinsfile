@@ -27,9 +27,11 @@ pipeline {
         stage('Releasing') {
             steps {
                 script {
-                    sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/w5j7m5y6'
-                    dockerImage.push("${REPOSITORY_URI}:${IMAGE_TAG}")
+                    docker.withRegistry("https://public.ecr.aws", registryCredential) {
+                        dockerImage.push("${REPOSITORY_URI}:${IMAGE_TAG}")
+                    }
                 }
+
             }
         }
 
