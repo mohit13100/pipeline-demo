@@ -9,7 +9,7 @@ pipeline {
     DESIRED_COUNT="1" // Set desired count if you need to scale your service
     IMAGE_REPO_NAME="repo-ecr-2" // Replace with your ECR repository name
     IMAGE_TAG="${env.BUILD_ID}" // This is set dynamically to tag your image with the Jenkins build ID
-    REPOSITORY_URI = "574143435348.dkr.ecr.us-east-1.amazonaws.com/repo-ecr-2" // Combined URI for your ECR repository
+    REPOSITORY_URI = "public.ecr.aws/w5j7m5y6/repo-ecr-2" // Combined URI for your ECR repository
     registryCredential = "aws-ecs-jenkins-cred-id" // The Jenkins credential ID for AWS
     JOB_NAME = "aws-ecs-pipeline-job" // Your Jenkins job name
     TEST_CONTAINER_NAME = "${JOB_NAME}-test-server" // A name for the test container
