@@ -42,8 +42,8 @@ pipeline {
                     dockerImage.push("${REPOSITORY_URI}:${IMAGE_TAG}")
                 }
          }
-       }
-     }
+      }
+     
 
     // Update task definition and service running in ECS cluster to deploy
     stage('Deploy') {
