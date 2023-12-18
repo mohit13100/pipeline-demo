@@ -27,11 +27,13 @@ pipeline {
         stage('Releasing') {
             steps {
                 script {
-                    docker.withRegistry("https://" + REPOSITORY_URI, "ecr:${AWS_DEFAULT_REGION}:" + registryCredential) {
-                        dockerImage.push("${REPOSITORY_URI}:${IMAGE_TAG}")
-                    }
+                    // Log in to the ECR public repository
+                    sh 'aws ecr-public get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPOSITORY_URI}'
+                    // Tag the image with the build number
+                    sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:${IMAGE_TAG}"
+                    // Push the image to the repository
+                    sh "docker push ${REPOSITORY_URI}:${IMAGE_TAG}"
                 }
-
             }
         }
 
